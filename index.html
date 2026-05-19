@@ -448,17 +448,6 @@
     </div>
     <select class="filter-select" id="cat-filter" onchange="filterCards()">
       <option value="">Все темы</option>
-      <option value="Оборудование">Оборудование</option>
-      <option value="Препарирование">Препарирование</option>
-      <option value="Кариес">Кариес и классы по Блеку</option>
-      <option value="Минимально">Минимально-инвазивные</option>
-      <option value="Материалы">Пломбировочные материалы</option>
-      <option value="Цементы">Цементы</option>
-      <option value="Композиты">Композиты</option>
-      <option value="Адгезивные">Адгезивные системы</option>
-      <option value="Техники">Техники пломбирования</option>
-      <option value="Анатомия">Анатомия зубов</option>
-      <option value="Практика">Практические навыки</option>
     </select>
     <select class="filter-select" id="status-filter" onchange="filterCards()">
       <option value="">Все карточки</option>
@@ -701,6 +690,21 @@ function showSection(name, btn) {
   document.getElementById('section-'+name).classList.add('visible');
   btn.classList.add('active');
 }
+
+const select = document.getElementById("cat-filter");
+
+// Получаем уникальные категории
+const categories = [...new Set(QUESTIONS.map(item => item.cat))];
+
+// Добавляем options
+categories.forEach(category => {
+    const option = document.createElement("option");
+
+    option.value = category;
+    option.textContent = category;
+
+    select.appendChild(option);
+});
 
 function renderCards(list) {
   const grid = document.getElementById('cards-grid');
